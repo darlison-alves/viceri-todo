@@ -16,6 +16,8 @@ app.use((err: BusinessError, req: Request, res: Response, next: NextFunction) =>
   res.status(err.statusCode || 500).send({ message: err.message || 'Something broke!' });
 });
 
+console.log('🚀 Starting server...');
+
 app.listen(3000, () => {
-  console.log('🚀 Server running on http://localhost:3000');
+  console.log('Server running on http://localhost:3000');
 });

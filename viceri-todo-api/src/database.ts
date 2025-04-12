@@ -6,18 +6,24 @@ export const db = await open({
   driver: sqlite3.Database,
 });
 
-console.log("[simulação de migration]")
-await db.exec(`
-  CREATE TABLE IF NOT EXISTS todos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    priority TEXT NOT NULL,
-    userId INTEGER NOT NULL,
-    done BOOLEAN DEFAULT 0,
-    FOREIGN KEY (userId) REFERENCES users(id)
-  );
-`);
+console.log("[simulação de migration de banco de dados]");
+try {
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS todos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      priority TEXT NOT NULL,
+      userId INTEGER NOT NULL,
+      done BOOLEAN DEFAULT 0,
+      FOREIGN KEY (userId) REFERENCES users(id)
+    );
+  `);
 
+} catch (error) {
+  console.error("Erro ao criar a tabela todos:", error);
+  throw error;
+}
+console.log("[script de migration table todos]")
 
 await db.exec(`
   CREATE TABLE IF NOT EXISTS users (
@@ -27,3 +33,5 @@ await db.exec(`
     email TEXT NOT NULL
   );
 `);
+
+console.log("[script de migration table users]")
