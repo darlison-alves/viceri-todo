@@ -1,0 +1,16 @@
+<div class="form-wrapper">
+  <form class="form-box" (ngSubmit)="login()">
+    <h2>Login</h2>
+    <p *ngIf="messageError" class="message-error">* {{ messageError }}</p>
+
+    <input type="email" name="email" [(ngModel)]="email" placeholder="Email" required />
+
+    <input type="password" name="password" [(ngModel)]="password" placeholder="Senha" required />
+
+    <button type="submit">Entrar</button>
+
+    <div class="form-footer">
+      <h4>Não tem conta? </h4><a routerLink="/register">clique aqui</a>
+    </div>
+  </form>
+</div>
