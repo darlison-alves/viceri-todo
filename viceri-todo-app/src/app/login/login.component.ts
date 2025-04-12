@@ -14,22 +14,30 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  messageError:string = "";
+  messageError: string = "";
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
 
   async login() {
-    const sucess = this.authService.login(this.email, this.password);
-
-    if(!sucess) {
-      this.messageError = "credenciais invalidas";
-      return;
-    }
-    await this.router.navigate(["/todo"]);
+    console.log('this.authService', this.authService)
+    this.authService.login(this.email, this.password)?.subscribe(
+        {
+          next: async (value) => {
+            this.messageError = "";
+            
+            localStorage.setItem("token", value?.token);
+            await this.router.navigate(["/todo"]);
+          },
+          error: (error) => {
+            console.log(error);
+            this.messageError = error?.error?.message || "credenciais invalidas";
+          }
+        }
+      );
   }
 
 }

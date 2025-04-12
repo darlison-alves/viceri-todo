@@ -1,8 +1,19 @@
 <div class="todo-container">
-    <h2>Minhas Tarefas</h2>
-
+    <div class="todo-header">
+        <h2>Minhas Tarefas</h2>
+        <h4 (click)="logout()">Sair</h4>
+    </div>
+    <hr />
     <form (submit)="addTask()" class="todo-form">
         <input type="text" [(ngModel)]="newTask" name="task" placeholder="Digite uma nova tarefa" required />
+
+        <select (change)="updatePriority($event)" class="todo-form" [(ngModel)]="priority" name="priority" required>
+            <option value="" disabled selected>Prioridade</option>
+            <option value="low">Baixa</option>
+            <option value="medium">Média</option>
+            <option value="high">Alta</option>
+        </select>
+
         <button type="submit">Adicionar</button>
     </form>
 
@@ -12,7 +23,20 @@
                 <input type="checkbox" [(ngModel)]="task.done" (change)="toggleDone(task)" />
                 {{ task.title }}
             </label>
+
+            <span class="priority-label" [ngClass]="{
+                'low': task.priority === 'low',
+                'medium': task.priority === 'medium',
+                'high': task.priority === 'high'
+            }">
+                {{ task.priority }}
+            </span>
+
             <button class="delete-btn" (click)="removeTask(i)">✖</button>
         </li>
     </ul>
+    <div class="todo-form todo-footer">
+        <button type="button" [disabled]="!canFinish()" (click)="finish()">Concluir</button>
+
+    </div>
 </div>

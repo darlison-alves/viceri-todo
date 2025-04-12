@@ -1,5 +1,5 @@
 .todo-container {
-  max-width: 500px;
+  max-width: 657px;
   margin: 3rem auto;
   padding: 2rem;
   background-color: #ffffff;
@@ -26,6 +26,14 @@
   border-radius: 0.5rem;
   font-size: 1rem;
 }
+
+.todo-form select {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+}
+
 
 .todo-form button {
   padding: 0.8rem 1.2rem;
@@ -76,4 +84,52 @@
 
 .delete-btn:hover {
   color: #c0392b;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.todo-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.todo-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #726f6f;
+  cursor: pointer;
+}
+
+.todo-container hr {
+  border: none;
+  height: 1px;
+  background-color: #eee;
+  margin: 1.5rem 0;
+}
+
+.todo-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.todo-footer button {
+  padding: 0.8rem 1.2rem;
+  background-color: #45a845;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.todo-footer button:hover {
+  background-color: #398043;
 }

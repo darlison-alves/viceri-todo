@@ -1,27 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL } from '../app.contants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private loggedIn = false;
-
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    if (email === 'admin@example.com' && password === '123456') {
-      this.loggedIn = true;
-      return true;
-    }
-    return false;
+    return this.http.post<{token: string}>(`${API_URL}/users/authenticate`, { email, password });
   }
 
   logout() {
-    this.loggedIn = false;
+    localStorage.removeItem("token");
   }
 
   isAuthenticated(): boolean {
-    return this.loggedIn;
+    return !!localStorage.getItem("token");
   }
 }
